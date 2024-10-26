@@ -1,6 +1,6 @@
 describe('Angurace', () => {
   it('should display title on home page', () => {
     cy.visit('/');
-    cy.contains('h1', 'Hello, angurace');
+    cy.contains('h1', 'Ponyracer');
   });
 });
