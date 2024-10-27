@@ -2,6 +2,8 @@
 import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
+import { PonyComponent } from '../pony/pony.component';
 import { RaceComponent } from './race.component';
 
 describe('RaceComponent', () => {
@@ -10,7 +12,7 @@ describe('RaceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RaceComponent],
+      imports: [RaceComponent, PonyComponent],
       providers: [provideExperimentalZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -47,14 +49,14 @@ describe('RaceComponent', () => {
     expect(raceName.textContent)
       .withContext('The h2 element should contain the race name')
       .toContain('Paris');
-    const ponies = element.querySelectorAll('li');
+    const ponies = fixture.debugElement.queryAll(By.directive(PonyComponent));
+    expect(ponies)
+      .withContext(
+        'You should use the PonyComponent in your template to display the ponies'
+      )
+      .not.toBeNull();
     expect(ponies.length)
-      .withContext('You should have one li elements per pony')
+      .withContext('You should have five pony components in your template')
       .toBe(5);
-    expect(ponies[0].textContent).toContain('Gentle Pie');
-    expect(ponies[1].textContent).toContain('Big Soda');
-    expect(ponies[2].textContent).toContain('Gentle Bottle');
-    expect(ponies[3].textContent).toContain('Superb Whiskey');
-    expect(ponies[4].textContent).toContain('Fast Rainbow');
   });
 });

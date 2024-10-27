@@ -14,6 +14,13 @@ describe('Angurace', () => {
     cy.contains(navbarLink, 'Races');
   });
 
+  it('should display ponies', () => {
+    cy.visit('/');
+    cy.get('figure').should('have.length', 10);
+    cy.get('img').should('have.length', 10);
+    cy.get('figcaption').should('have.length', 10);
+  });
+
   it('should display a navbar collapsed on small screen', () => {
     cy.viewport('iphone-6+');
     cy.visit('/');
