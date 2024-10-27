@@ -2,6 +2,7 @@ describe('Angurace', () => {
   it('should display title on home page', () => {
     cy.visit('/');
     cy.contains('h1', 'Ponyracer');
+    cy.get('.container ul li').should('have.length', 10);
   });
 
   const navbarBrand = '.navbar-brand';
